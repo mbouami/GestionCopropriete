@@ -96,7 +96,7 @@
                     android:id="@+id/btn_addcopro"
                     android:tag="creercopro"
                     android:layout_gravity="center_horizontal"
-                    android:onClick="CreerCopro" />
+                    android:onClick="GestionDepenses" />
 
                 <Button
                     android:layout_width="wrap_content"
