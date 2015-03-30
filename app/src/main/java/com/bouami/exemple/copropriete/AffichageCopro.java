@@ -13,7 +13,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +21,7 @@ import com.bouami.exemple.copropriete.Models.Coproprietaire;
 
 
 public class AffichageCopro extends FragmentActivity implements CoproprietairesFragment.OnFragmentInteractionListener {
-    private Fragment frag;
+    protected Fragment frag;
     private Cursor mcursor;
 
     @Override
@@ -98,7 +97,7 @@ public class AffichageCopro extends FragmentActivity implements CoproprietairesF
         values.put(CoproParametres.parametre.COLUMN_COPROPRIETAIRE_MAIL,mail);
         values.put(CoproParametres.parametre.COLUMN_COPROPRIETAIRE_APPART,appart);
         values.put(CoproParametres.parametre.COLUMN_COPROPRIETAIRE_CREATEDATE,lecopro.getCreer_le());
-        Uri uri = null;
+        Uri uri;
         uri = CoproParametres.parametre.contentresolver.insert(CoproParametres.parametre.CONTENT_URI_EN_COURS, values);
         if (uri!=null) {
             show("Le copropriétaire " + lecopro.toString() + " a été enregistré avec succès.");
@@ -154,19 +153,14 @@ public class AffichageCopro extends FragmentActivity implements CoproprietairesF
         TextView prenomcopro = (TextView) findViewById(R.id.prenom);
         TextView mailcopro = (TextView) findViewById(R.id.mail);
         TextView appartcopro = (TextView) findViewById(R.id.appartement);
-        String civi = civicopro.getText().toString();
-        String nom = nomcopro.getText().toString();
-        String prenom = prenomcopro.getText().toString();
-        String mail = mailcopro.getText().toString();
-        String appart = appartcopro.getText().toString();
         civicopro.setText(null);
         nomcopro.setText(null);
         prenomcopro.setText(null);
         mailcopro.setText(null);
         appartcopro.setText(null);
-        ((Button) findViewById(R.id.btn_addcopro)).setVisibility(View.VISIBLE);
-        ((Button) findViewById(R.id.btn_modificopro)).setVisibility(View.INVISIBLE);
-        ((Button) findViewById(R.id.btn_deletecopro)).setVisibility(View.INVISIBLE);
+        findViewById(R.id.btn_addcopro).setVisibility(View.VISIBLE);
+        findViewById(R.id.btn_modificopro).setVisibility(View.INVISIBLE);
+        findViewById(R.id.btn_deletecopro).setVisibility(View.INVISIBLE);
     }
 
     private void Remplir_Champs_Copro(Cursor c) {
@@ -185,9 +179,9 @@ public class AffichageCopro extends FragmentActivity implements CoproprietairesF
         prenom.setText(prenomcopro);
         mail.setText(mailcopro);
         appart.setText(appartcopro);
-        ((Button) findViewById(R.id.btn_addcopro)).setVisibility(View.INVISIBLE);
-        ((Button) findViewById(R.id.btn_modificopro)).setVisibility(View.VISIBLE);
-        ((Button) findViewById(R.id.btn_deletecopro)).setVisibility(View.VISIBLE);
+        findViewById(R.id.btn_addcopro).setVisibility(View.INVISIBLE);
+        findViewById(R.id.btn_modificopro).setVisibility(View.VISIBLE);
+        findViewById(R.id.btn_deletecopro).setVisibility(View.VISIBLE);
     }
 
     private void show(String txt) {
