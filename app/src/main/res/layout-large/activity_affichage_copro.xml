@@ -1,0 +1,19 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:weightSum="1">
+
+    <fragment
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:name="com.bouami.exemple.copropriete.CoproprietairesFragment"
+        android:id="@+id/choix"
+        android:layout_weight="1.17" />
+
+    <fragment
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:name="com.bouami.exemple.copropriete.DetailFragment"
+        android:id="@+id/detail" />
+</LinearLayout>

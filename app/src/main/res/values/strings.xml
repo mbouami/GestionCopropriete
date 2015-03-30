@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Copropriete</string>
+
+    <string name="hello_world">Application de Gestion de la copropriété</string>
+    <string name="action_settings">Paramètres</string>
+    <string name="search_title">Chercher un copropriétaire</string>
+    <string name="btn_copro">Gestion des copropriétaires</string>
+    <string name="btn_depenses">Gestion des Dépenses</string>
+    <string name="content_authority">com.bouami.exemple.copropriete</string>
+    <string name="adddepens">Ajouter une dépense</string>
+    <string name="civilite">Civilité</string>
+    <string name="nom">Nom</string>
+    <string name="prenom">Prénom</string>
+    <string name="mail">Mail</string>
+    <string name="appart">Numéro Appart</string>
+    <string name="add">Ajouter</string>
+    <string name="versement">somme versée</string>
+    <string name="totalversement">Total des versements</string>
+    <string name="choix_civilite">Choisissez une civilité</string>
+    <string-array name="liste_civilites">
+        <item >Madame</item>
+        <item >Mademoiselle</item>
+        <item >Monsieur</item>
+    </string-array>
+    <string name="title_activity_affichage_copro">AffichageCopro</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="liste_copro">Liste des copropriétaires</string>
+    <string name="liste_cotisations">Liste des cotisations</string>
+    <string name="liste_depenses">Liste des dépenses</string>
+    <string name="addcopro">Ajouter</string>
+    <string name="deletecopro">Supprimer</string>
+    <string name="modifcopro">Modifier</string>
+    <string name="action_delete">Supprimer</string>
+</resources>

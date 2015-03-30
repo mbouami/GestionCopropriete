@@ -1,0 +1,115 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.bouami.exemple.copropriete.CoproprietairesFragment">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context="com.example.coprogestion.ChoixFragment$PlaceholderFragment" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:weightSum="1">
+
+            <TextView android:layout_width="match_parent" android:layout_height="43dp"
+                android:text="@string/liste_copro"
+                style="@style/Base.TextAppearance.Widget.AppCompat.Toolbar.Title" />
+
+            <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="154dp"
+                android:id="@+id/listecoproprietaires"
+                android:layout_weight="0.34"
+                android:background="#fff1e0ff" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/red"
+                android:visibility="visible" />
+
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:completionThreshold="1"
+                android:completionHintView="@string/choix_civilite"
+                android:ems="10"
+                android:id="@+id/civilite"
+                android:hint="@string/choix_civilite"
+                android:autoText="true" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/nom"
+                android:layout_gravity="center_horizontal"
+                android:hint="@string/nom" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/prenom"
+                android:layout_gravity="center_horizontal"
+                android:hint="@string/prenom" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/mail"
+                android:layout_gravity="center_horizontal"
+                android:hint="@string/mail" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/appartement"
+                android:layout_gravity="center_horizontal"
+                android:hint="@string/appart" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/modifcopro"
+                    android:id="@+id/btn_modificopro"
+                    android:tag="modifiercopro"
+                    android:onClick="ModifierCopro"
+                    android:visibility="invisible" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/addcopro"
+                    android:id="@+id/btn_addcopro"
+                    android:tag="creercopro"
+                    android:layout_gravity="center_horizontal"
+                    android:onClick="CreerCopro" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/deletecopro"
+                    android:id="@+id/btn_deletecopro"
+                    android:tag="supprimercopro"
+                    android:onClick="SupprimerCopro"
+                    android:visibility="invisible" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</FrameLayout>
