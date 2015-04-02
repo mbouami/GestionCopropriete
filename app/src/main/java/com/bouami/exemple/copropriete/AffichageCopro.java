@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,11 +19,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bouami.exemple.copropriete.Models.Coproprietaire;
+import com.bouami.exemple.copropriete.Models.Cotisation;
 
 
-public class AffichageCopro extends FragmentActivity implements CoproprietairesFragment.OnFragmentInteractionListener {
+public class AffichageCopro extends FragmentActivity implements CoproprietairesFragment.OnFragmentInteractionListener, DetailFragment.OnFragmentCotInteractionListener {
     protected Fragment frag;
-    private Cursor mcursor;
+    protected Cursor mcursor, mcotcursor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +78,20 @@ public class AffichageCopro extends FragmentActivity implements CoproprietairesF
     public void onFragmentInteraction(Cursor c) {
         this.mcursor = c;
         Remplir_Champs_Copro(c);
+    }
+
+
+    @Override
+    public void onFragmentCotisationInteraction(Cursor c) {
+        this.mcursor = c;
+        DetailFragment detailFrag = (DetailFragment) getSupportFragmentManager().findFragmentById(R.id.detail);
+        if (detailFrag==null) {
+            DetailFragment cotFragment = new DetailFragment(mcursor);
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_affichage, cotFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }
     }
 
     public void CreerCopro(View v) {
@@ -184,7 +200,54 @@ public class AffichageCopro extends FragmentActivity implements CoproprietairesF
         findViewById(R.id.btn_deletecopro).setVisibility(View.VISIBLE);
     }
 
+    public void CreerVersement(View v) {
+        final ContentValues values = new ContentValues();
+        String versement = ((TextView) findViewById(R.id.versement)).getText().toString();
+        Coproprietaire lecopro = new Coproprietaire(mcursor);
+        values.put(CoproParametres.parametre.COLUMN_COTISATIONS_KEY_COPROPRIETAIRE,lecopro.getId());
+        values.put(CoproParametres.parametre.COLUMN_COTISATIONS_SOMME,Double.parseDouble(versement));
+        values.put(CoproParametres.parametre.COLUMN_COTISATIONS_DONNEELE,lecopro.getCreer_le());
+        Uri uri;
+        uri = CoproParametres.parametre.contentresolver.insert(CoproParametres.parametre.CONTENT_URI_EN_COURS, values);
+        if (uri!=null) {
+            show("La somme de  " + Double.parseDouble(versement) + " a été enregistrée avec succès pour "+lecopro.toString());
+            Vider_Champs_Cotisation();
+
+        }
+    }
+
+    public void SupprimerVersement(View v) {
+        Cotisation lacot = new Cotisation(mcotcursor);
+        Uri uri = Uri.parse("content://" + CoproParametres.parametre.AUTHORITY + "/" + CoproParametres.parametre.TABLE_COTISATIONS+"/"+lacot.getId());
+        Integer res = CoproParametres.parametre.contentresolver.delete(uri,null,null);
+        if (res>0) {
+            show("La cotisation "+lacot.toString()+" a été supprimée avec succès.");
+            Vider_Champs_Cotisation();
+        } else {
+            show("Erreur lors de la suppression du cotisation "+lacot.toString());
+        }
+    }
+
+    private void Vider_Champs_Cotisation() {
+        TextView versementcotisation = (TextView) findViewById(R.id.versement);
+        versementcotisation.setText(null);
+        findViewById(R.id.btnAddVersement).setVisibility(View.VISIBLE);
+        findViewById(R.id.btnModifVersement).setVisibility(View.INVISIBLE);
+        findViewById(R.id.btnDelVersement).setVisibility(View.INVISIBLE);
+    }
+
     private void show(String txt) {
         Toast.makeText(getBaseContext(), String.valueOf(txt), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onFragmentCotInteraction(Cursor c) {
+        this.mcotcursor = c;
+        final String cotisation = c.getString(c.getColumnIndexOrThrow(CoproParametres.parametre.COLUMN_COTISATIONS_SOMME));
+        final TextView versement = (TextView) findViewById(R.id.versement);
+        versement.setText(cotisation);
+        findViewById(R.id.btnAddVersement).setVisibility(View.INVISIBLE);
+        findViewById(R.id.btnModifVersement).setVisibility(View.VISIBLE);
+        findViewById(R.id.btnDelVersement).setVisibility(View.VISIBLE);
     }
 }

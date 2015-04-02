@@ -1,36 +1,22 @@
 package com.bouami.exemple.copropriete;
 
 import android.app.Activity;
-import android.content.ContentValues;
-import android.content.Intent;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.support.v7.internal.widget.AdapterViewCompat;
-import android.support.v7.view.ActionMode;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bouami.exemple.copropriete.Adapters.CoproprietairesAdapter;
-import com.bouami.exemple.copropriete.Models.Coproprietaire;
-
-import java.util.zip.Inflater;
 
 
 /**
@@ -42,7 +28,8 @@ import java.util.zip.Inflater;
  * create an instance of this fragment.
  */
 public class CoproprietairesFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
-    public int selectedItem = -1;
+    private int selectedItem = -1;
+    protected Cursor mcursor;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -54,7 +41,8 @@ public class CoproprietairesFragment extends Fragment implements LoaderManager.L
     private String mParam1;
     private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
+    private OnFragmentInteractionListener mListener, mCotisationListener;
+
 
     /**
      * Use this factory method to create a new instance of
@@ -115,12 +103,14 @@ public class CoproprietairesFragment extends Fragment implements LoaderManager.L
         final ListView listecopros = (ListView) getView().findViewById(R.id.listecoproprietaires);
         listecopros.setAdapter(mAdapter);
         getLoaderManager().initLoader(0, savedInstanceState, this);
+
         listecopros.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 selectedItem = position;
-                final Cursor cursor = (Cursor) listecopros.getItemAtPosition(position);
-                mListener.onFragmentInteraction(cursor);
+                mcursor = (Cursor) listecopros.getItemAtPosition(position);
+/*                final Cursor cursor = (Cursor) listecopros.getItemAtPosition(position);*/
+                mListener.onFragmentInteraction(mcursor);
                 // Set the item as checked to be highlighted when in two-pane layout
                 listecopros.setItemChecked(position, true);
             }
@@ -129,11 +119,13 @@ public class CoproprietairesFragment extends Fragment implements LoaderManager.L
         listecopros.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                selectedItem = position;
-                final Cursor cursor = (Cursor) listecopros.getItemAtPosition(position);
-                Coproprietaire lecopro = new Coproprietaire(cursor);
+/*                selectedItem = position;
+                final Cursor cursor = (Cursor) listecopros.getItemAtPosition(position);*/
+/*                Coproprietaire lecopro = new Coproprietaire(mcursor);
                 show("le copropriétaire sélectionné : " + lecopro.toString());
                 registerForContextMenu(view);
+                return true;*/
+                mCotisationListener.onFragmentCotisationInteraction(mcursor);
                 return true;
             }
         });
@@ -151,9 +143,10 @@ public class CoproprietairesFragment extends Fragment implements LoaderManager.L
         super.onAttach(activity);
         try {
             mListener = (OnFragmentInteractionListener) activity;
+            mCotisationListener = (OnFragmentInteractionListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement OnFragmentCotInteractionListener");
         }
     }
 
@@ -197,6 +190,7 @@ public class CoproprietairesFragment extends Fragment implements LoaderManager.L
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Cursor c);
+        public void onFragmentCotisationInteraction(Cursor c);
     }
 
     private void show(String txt) {

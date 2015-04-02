@@ -75,7 +75,15 @@ public class Cotisation {
     }
 
     public String getDonnee_le() {
-        return donnee_le;
+        SimpleDateFormat fromUser = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat myFormat = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            return myFormat.format(fromUser.parse(donnee_le));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+/*        return donnee_le;*/
     }
 
     public void setDonnee_le(String donnee_le) {
@@ -88,4 +96,5 @@ public class Cotisation {
         Date date = new Date();
         return dateFormat.format(date);
     }
+
 }

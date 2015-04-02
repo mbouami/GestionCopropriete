@@ -4,7 +4,84 @@
     tools:context="com.bouami.exemple.copropriete.DetailFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="@string/liste_cotisations" />
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TextView android:layout_width="fill_parent" android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:id="@+id/titre_cotisation"
+                android:textAlignment="center"
+                style="@style/Base.TextAppearance.AppCompat.Display2" />
+
+            <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="272dp"
+                android:id="@+id/listeversements"
+                android:background="#fff3ffe0" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/totalversement"
+                android:id="@+id/totalversement"
+                android:textAlignment="center"
+                style="@style/Base.TextAppearance.AppCompat.Headline" />
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/versement"
+                android:layout_toStartOf="@+id/btnAddVersement"
+                android:layout_toLeftOf="@+id/btnAddVersement"
+                android:hint="@string/versement"
+                android:textAlignment="gravity" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/addversement"
+                        android:onClick="CreerVersement"
+                        android:id="@+id/btnAddVersement"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/deleteversement"
+                        android:onClick="SupprimerVersement"
+                        android:id="@+id/btnDelVersement"
+                        android:visibility="invisible" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/modifversement"
+                        android:onClick="ModifierVersement"
+                        android:id="@+id/btnModifVersement"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:visibility="invisible" />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </FrameLayout>

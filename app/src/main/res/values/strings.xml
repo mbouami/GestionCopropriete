@@ -13,7 +13,6 @@
     <string name="prenom">Prénom</string>
     <string name="mail">Mail</string>
     <string name="appart">Numéro Appart</string>
-    <string name="add">Ajouter</string>
     <string name="versement">somme versée</string>
     <string name="totalversement">Total des versements</string>
     <string name="choix_civilite">Choisissez une civilité</string>
@@ -26,10 +25,13 @@
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="liste_copro">Liste des copropriétaires</string>
-    <string name="liste_cotisations">Liste des cotisations</string>
+    <string name="liste_cotisations">Liste des cotisations de : </string>
     <string name="liste_depenses">Liste des dépenses</string>
     <string name="addcopro">Ajouter</string>
     <string name="deletecopro">Supprimer</string>
     <string name="modifcopro">Modifier</string>
     <string name="action_delete">Supprimer</string>
+    <string name="addversement">Ajouter</string>
+    <string name="deleteversement">Supprimer</string>
+    <string name="modifversement">Modifier</string>
 </resources>
